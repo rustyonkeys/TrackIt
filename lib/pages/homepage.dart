@@ -19,6 +19,7 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       backgroundColor: Colors.grey[100],
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,10 +194,11 @@ class _HomepageState extends State<Homepage> {
           // Transaction List
           Expanded(
             child: ListView.builder(
+              padding: EdgeInsets.only(top: 10),
               itemCount: transactions.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Card(
                     elevation: 2,
                     shape: RoundedRectangleBorder(

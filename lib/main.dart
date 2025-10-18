@@ -1,8 +1,9 @@
 import "package:expense_tracker/util/bottomnavbar.dart";
 import "package:flutter/material.dart";
-import "package:expense_tracker/pages/homepage.dart";
+
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
