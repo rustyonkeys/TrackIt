@@ -1,4 +1,4 @@
-import "package:expense_tracker/util/bottomnavbar.dart";
+import "package:expense_tracker/pages/splashscreenpage.dart";
 import "package:flutter/material.dart";
 
 
@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Bottomnavbar(),
+    return MaterialApp(
+      home: SplashScreenPage(),
     );
   }
 }

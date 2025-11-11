@@ -96,7 +96,7 @@ class Account extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                   color: Colors.grey.shade300,
                 ),
-                height: 290,
+                height: 260,
                 width: 400,
                 margin: EdgeInsets.only(left: 20, right: 20),
                 child: Padding(
@@ -132,13 +132,13 @@ class Account extends StatelessWidget {
                           children: [
                             Icon(Icons.account_circle_sharp),
                             SizedBox(width: 30,),
-                            Text("Manage fixed expenses",
+                            Text("Edit fixed expenses",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500
                               ),),
-                            SizedBox(width: 40,),
+                            SizedBox(width: 70,),
                             IconButton(onPressed:(){},
                                 icon: Icon(Icons.arrow_forward_ios_outlined))
                           ],
@@ -158,7 +158,7 @@ class Account extends StatelessWidget {
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500
                               ),),
-                            SizedBox(width: 89,),
+                            SizedBox(width: 82,),
                             IconButton(onPressed:(){},
                                 icon: Icon(Icons.arrow_forward_ios_outlined))
                           ],
@@ -171,10 +171,10 @@ class Account extends StatelessWidget {
               ),
 
 
-            SizedBox(height: 60),
+            SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.only(left: 25),
-              child: Text(Settings",
+              child: Text("Settings",
                 style: TextStyle(
                     color: Colors.grey.shade600,
                     fontSize: 20,
@@ -209,7 +209,7 @@ class Account extends StatelessWidget {
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500
                             ),),
-                          SizedBox(width: 60,),
+                          SizedBox(width: 56,),
                           IconButton(onPressed:(){},
                               icon: Icon(Icons.arrow_forward_ios_outlined))
                         ],
@@ -229,7 +229,7 @@ class Account extends StatelessWidget {
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500
                             ),),
-                          SizedBox(width: 40,),
+                          SizedBox(width: 30,),
                           IconButton(onPressed:(){},
                               icon: Icon(Icons.arrow_forward_ios_outlined))
                         ],
@@ -243,13 +243,13 @@ class Account extends StatelessWidget {
                         children: [
                           Icon(Icons.account_circle_sharp),
                           SizedBox(width: 30,),
-                          Text("Change Password",
+                          Text("Log out",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500
                             ),),
-                          SizedBox(width: 89,),
+                          SizedBox(width: 175,),
                           IconButton(onPressed:(){},
                               icon: Icon(Icons.arrow_forward_ios_outlined))
                         ],
