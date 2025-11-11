@@ -2,7 +2,7 @@ import 'package:expense_tracker/pages/addingpage.dart';
 import 'package:expense_tracker/pages/analyticspage.dart';
 import 'package:expense_tracker/pages/expenselistpage.dart';
 import 'package:expense_tracker/pages/homepage.dart';
-import 'package:expense_tracker/pages/settingspage.dart';
+import 'package:expense_tracker/pages/accountpage.dart';
 import 'package:flutter/material.dart';
 
 
@@ -20,7 +20,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
     ExpenseListPage(),
     AddExpense(),
     AnalyticsPage(),
-    Settings()
+    Account()
   ];
   void _onItemTapped(int index){
     setState(() {
@@ -52,7 +52,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
               _buildNavItem(Icons.list_alt, 1),
               _buildNavItem(Icons.add,2),
               _buildNavItem(Icons.analytics_outlined, 3),
-              _buildNavItem(Icons.settings, 4)
+              _buildNavItem(Icons.person, 4)
             ],
           ),
         ),

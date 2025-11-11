@@ -50,14 +50,15 @@ class _ExpenseListPageState extends State<ExpenseListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Expense Manager'),
-        backgroundColor: Colors.black,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
+            Text("You Activity",
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold
+            ),),
             /// Expected Expenses (Top Row)
             Expanded(
               child: DragTarget<ExpenseItem>(
