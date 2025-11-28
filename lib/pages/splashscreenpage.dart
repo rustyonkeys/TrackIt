@@ -13,12 +13,12 @@ class SplashScreenPage extends StatelessWidget {
     });
 
     return Scaffold(
-      backgroundColor: Colors.blue, // Splash screen background color
+      backgroundColor: Colors.white, // Splash screen background color
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/logo.jpg",
+            Image.asset("assets/logo.png",
               width: 300,
               height: 300,
             ),
