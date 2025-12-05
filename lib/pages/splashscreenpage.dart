@@ -18,12 +18,12 @@ class SplashScreenPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/logo.png",
-              width: 300,
-              height: 300,
+            Image.asset("assets/trackit-logo.png",
+              width: 500,
+              height: 500,
             ),
             SizedBox(height: 90),
-            CircularProgressIndicator(),
+
           ],
         ),
       ),

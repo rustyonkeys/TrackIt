@@ -32,6 +32,7 @@ dependencies:
     sdk: flutter
   google_nav_bar: ^5.0.7
   intl: ^0.19.0
+  smooth_page_indicator: ^1.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -56,7 +57,10 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/
+    - assets/trackit-logo.png
+    - assets/firstpage.jpg
+    - assets/secondpage.jpg
+    - assets/thirdpage.jpg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

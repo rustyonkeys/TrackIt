@@ -8,76 +8,87 @@ class Firstpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 60),
+        padding: EdgeInsets.symmetric(
+            horizontal: width * 0.08,
+            vertical: height * 0.05),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [Text("TrackIT.",
             style: TextStyle(
-              fontSize: 25,
+              fontSize: width*0.05,
               fontWeight: FontWeight.w500
             ),
           ),
-          SizedBox(height: 490,),
+          SizedBox(height: height*0.05,),
+          Image.asset("assets/firstpage.jpg",
+            width:width*0.9,
+            height:height*0.4,),
+          Spacer(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("Understand Your ",
               style: TextStyle(
-                fontSize: 50,
-                fontWeight: FontWeight.w400,
+                fontSize: width*0.1,
+                fontWeight: FontWeight.bold,
                 height: 1
               ),),
               Text("Spending.",
                 style: TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.w600,
+                    fontSize: width*0.1,
+                    fontWeight: FontWeight.bold,
                     height: 1
                 ),),
               Text("Unlock Your",
                 style: TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.w400,
+                    fontSize: width*0.1,
+                    fontWeight: FontWeight.bold,
                     height: 1
                 ),),
               Text("Savings.",
                 style: TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.w600,
+                    fontSize: width*0.1,
+                    fontWeight: FontWeight.bold,
                     height: 1
                 ),)
             ],
           ),
-            SizedBox(height: 20,),
+            SizedBox(height: height*0.02,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("Take control of your daily expenses and build habits",
-                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: width*0.0352,
                       color: Colors.black54,)
                 ),
                 Text(" that grow your wealth.",
-                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: width*0.0352,
                       color: Colors.black54,)
                 ),],),
-            SizedBox(height: 20,),
+            SizedBox(height:height*0.02,),
             ElevatedButton(onPressed: (){
               Navigator.push(
-                  context, 
+                  context,
                   MaterialPageRoute(builder: (context) => Secondpage()),);
             },
               child: Text("Next",
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: width*0.04,
                     color: Colors.white
                 ),),
               style: ElevatedButton.styleFrom(
-                  minimumSize: Size(400, 60),
+                  minimumSize: Size(
+                  width*0.9, height*0.06),
                   backgroundColor: Colors.black),)
           ],
         ),
