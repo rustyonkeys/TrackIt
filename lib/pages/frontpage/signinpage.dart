@@ -31,7 +31,10 @@ class Signinpage extends StatelessWidget {
               ),),
             SizedBox(height: height*0.01,),
             Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: EdgeInsets.symmetric(
+                  vertical: height*0.026,
+                  horizontal: width*0.026
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -45,7 +48,7 @@ class Signinpage extends StatelessWidget {
                       // labelText: 'Email',
                       hintText: "Enter email",
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)
+                        borderRadius: BorderRadius.circular(width*0.027)
                       )
                     ),
                   ),
@@ -60,7 +63,7 @@ class Signinpage extends StatelessWidget {
                       // labelText: 'Password',
                         hintText: "Enter Password",
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15)
+                            borderRadius: BorderRadius.circular(width*0.027)
                         )
                     ),
                   ),

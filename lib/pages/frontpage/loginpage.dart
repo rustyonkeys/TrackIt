@@ -9,7 +9,11 @@ class Loginpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -17,54 +21,57 @@ class Loginpage extends StatelessWidget {
             // SizedBox(height: 60,),
             Text("Get started with TrackIT",
               style: TextStyle(
-                fontSize: 24,
+                fontSize: width*0.05,
                 fontWeight: FontWeight.bold,
               ),),
-            SizedBox(height: 5,),
+            SizedBox(height: height*0.0013,),
             Text("Create a secure account in just a few steps",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: width*0.04,
                 fontWeight: FontWeight.w300,
               ),),
-            SizedBox(height: 40,),
+            SizedBox(height: height*0.01,),
             Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: EdgeInsets.symmetric(
+                vertical: height*0.026,
+                horizontal: width*0.026
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Email",
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: width*0.038,
                     ),),
-                  SizedBox(height: 5,),
+                  SizedBox(height: height*0.005,),
                   TextField(
                     decoration: InputDecoration(
                       // labelText: 'Email',
                         hintText: "Enter email",
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15)
+                            borderRadius: BorderRadius.circular(width*0.027)
                         )
                     ),
                   ),
-                  SizedBox(height: 22,),
+                  SizedBox(height: height*0.035,),
                   Text("Password",
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: width*0.038,
                     ),),
-                  SizedBox(height: 5,),
+                  SizedBox(height: height*0.005,),
                   TextField(
                     decoration: InputDecoration(
                       // labelText: 'Password',
                         hintText: "Enter Password",
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15)
+                            borderRadius: BorderRadius.circular(width*0.027)
                         )
                     ),
                   ),
 
-                  SizedBox(height: 3,),
+                  // SizedBox(height: height*0.002,),
                   Padding(
-                    padding: const EdgeInsets.only(left: 236.0),
+                    padding: EdgeInsets.only(left: width*0.6),
                     child: TextButton(onPressed: (){}, child: Text("Forgot Password?")),
                   )
                 ],
@@ -78,19 +85,19 @@ class Loginpage extends StatelessWidget {
             }, child: Text("Log In",
               style: TextStyle(
                   color: Colors.white,
-                fontSize: 18
+                fontSize: width*0.04,
               ),),
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(342, 53),
+                minimumSize: Size(width*0.9, height*0.06),
                 backgroundColor: Colors.black,
               ),),
-            SizedBox(height: 18,),
+            SizedBox(height: height*0.02,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Don't have an account?",
                   style: TextStyle(
-                      fontSize: 16,
+                      fontSize: width*0.039,
                       fontWeight: FontWeight.w400
                   ),),
                 TextButton(onPressed: (){
@@ -98,7 +105,7 @@ class Loginpage extends StatelessWidget {
                       context,
                       MaterialPageRoute(builder: (context)=> Signinpage()));
                 }, child: Text("Register",style: TextStyle(
-                  fontSize: 16,
+                  fontSize: width*0.039,
                   // fontWeight: FontWeight.w400
                 ),))
               ],
