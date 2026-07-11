@@ -1,29 +1,36 @@
 import 'package:expense_tracker/pages/frontpage/firstpage.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreenPage extends StatelessWidget {
+class SplashScreenPage extends StatefulWidget {
+  const SplashScreenPage({super.key});
+
   @override
-  Widget build(BuildContext context) {
-    // Show splash screen for 3 seconds and then navigate to Homepage
-    Future.delayed(Duration(seconds: 3), () {
+  State<SplashScreenPage> createState() => _SplashScreenPageState();
+}
+
+class _SplashScreenPageState extends State<SplashScreenPage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Firstpage()), // Navigate to Homepage after the splash
+        MaterialPageRoute(builder: (context) => const Firstpage()),
       );
     });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Splash screen background color
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/trackit-logo.png",
-              width: 500,
-              height: 500,
-            ),
-            SizedBox(height: 90),
-
+            Image.asset("assets/trackit-logo.png", width: 500, height: 500),
+            const SizedBox(height: 90),
           ],
         ),
       ),

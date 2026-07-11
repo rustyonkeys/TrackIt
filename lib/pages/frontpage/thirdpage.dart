@@ -15,92 +15,119 @@ class Thirdpage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: width * 0.08,
-            vertical: height * 0.05),
+          horizontal: width * 0.08,
+          vertical: height * 0.05,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [Text("TrackIT.",
-            style: TextStyle(
-                fontSize: width*0.05,
-                fontWeight: FontWeight.w500
+          children: [
+            Text(
+              "TrackIT.",
+              style: TextStyle(
+                fontSize: width * 0.05,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-            SizedBox(height: height*0.05,),
-            Image.asset("assets/thirdpage.jpg",
-              width:width*0.9,
-              height:height*0.4,),
+            SizedBox(height: height * 0.05),
+            Image.asset(
+              "assets/thirdpage.jpg",
+              width: width * 0.9,
+              height: height * 0.4,
+            ),
             Spacer(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("The Fastest Way ",
+                Text(
+                  "The Fastest Way ",
                   style: TextStyle(
-                      fontSize: width*0.1,
-                      fontWeight: FontWeight.bold,
-                      height: 1
-                  ),),
-                Text("To Track Your",
+                    fontSize: width * 0.1,
+                    fontWeight: FontWeight.bold,
+                    height: 1,
+                  ),
+                ),
+                Text(
+                  "To Track Your",
                   style: TextStyle(
-                      fontSize: width*0.1,
-                      fontWeight: FontWeight.bold,
-                      height: 1
-                  ),),
-                Text("Expenses",
+                    fontSize: width * 0.1,
+                    fontWeight: FontWeight.bold,
+                    height: 1,
+                  ),
+                ),
+                Text(
+                  "Expenses",
                   style: TextStyle(
-                      fontSize: width*0.1,
-                      fontWeight: FontWeight.bold,
-                      height: 1
-                  ),),
+                    fontSize: width * 0.1,
+                    fontWeight: FontWeight.bold,
+                    height: 1,
+                  ),
+                ),
               ],
             ),
-            SizedBox(height: height*0.02,),
+            SizedBox(height: height * 0.02),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Take your spending instantly and make your ",
-                    style: TextStyle(
-                      fontSize: width*0.0352,
-                      color: Colors.black54,)
+                Text(
+                  "Take your spending instantly and make your ",
+                  style: TextStyle(
+                    fontSize: width * 0.0352,
+                    color: Colors.black54,
+                  ),
                 ),
-                Text("finances organized with zero hassle.",
-                    style: TextStyle(
-                      fontSize: width*0.0352,
-                      color: Colors.black54,)
-                ),],),
-            SizedBox(height:height*0.02,),
+                Text(
+                  "finances organized with zero hassle.",
+                  style: TextStyle(
+                    fontSize: width * 0.0352,
+                    color: Colors.black54,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: height * 0.02),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton(onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Signinpage()),);
-                },
-                  child: Text("Register",
-                    style: TextStyle(
-                        fontSize: width*0.04,
-                        color: Colors.white
-                    ),),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Signinpage()),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                          width*0.41, height*0.06),
-                      backgroundColor: Colors.black),),
-                ElevatedButton(onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Loginpage()),);
-                },
-                  child: Text("Login",
+                    minimumSize: Size(width * 0.41, height * 0.06),
+                    backgroundColor: Colors.black,
+                  ),
+                  child: Text(
+                    "Register",
                     style: TextStyle(
-                        fontSize: width*0.04,
-                        color: Colors.white
-                    ),),
+                      fontSize: width * 0.04,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Loginpage()),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                          width*0.41, height*0.06),
-                      backgroundColor: Colors.black),),
+                    minimumSize: Size(width * 0.41, height * 0.06),
+                    backgroundColor: Colors.black,
+                  ),
+                  child: Text(
+                    "Login",
+                    style: TextStyle(
+                      fontSize: width * 0.04,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

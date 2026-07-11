@@ -1,30 +1,76 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+import 'package:expense_tracker/models/transaction_entry.dart';
+import 'package:expense_tracker/pages/homepage.dart';
+import 'package:expense_tracker/pages/expenselistpage.dart';
+import 'package:expense_tracker/pages/fixed_expenses_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:expense_tracker/main.dart';
-
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('home shows an empty state without transactions', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: Homepage(transactions: [])),
+    );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('\$0.00'), findsNWidgets(3));
+    expect(find.text('No transactions yet. Add one to see it here.'), findsOne);
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  testWidgets('home calculates and displays saved transactions', (
+    tester,
+  ) async {
+    final transactions = [
+      TransactionEntry(
+        amount: 125,
+        isExpense: false,
+        category: 'Salary',
+        note: '',
+        date: DateTime.now(),
+        emoji: '',
+      ),
+      TransactionEntry(
+        amount: 25,
+        isExpense: true,
+        category: 'Food',
+        note: 'Lunch',
+        date: DateTime.now(),
+        emoji: '',
+      ),
+    ];
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await tester.pumpWidget(
+      MaterialApp(home: Homepage(transactions: transactions)),
+    );
+
+    expect(find.text('\$100.00'), findsOne);
+    expect(find.text('\$125.00'), findsOne);
+    expect(find.text('\$25.00'), findsOne);
+    expect(find.text('Lunch'), findsOne);
+  });
+
+  testWidgets('activity can switch between time filters', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: ExpenseListPage(transactions: [])),
+    );
+
+    expect(find.text('Day'), findsOne);
+    expect(find.text('Month'), findsOne);
+    expect(find.text('Quarter'), findsOne);
+    expect(find.text('Year'), findsOne);
+
+    await tester.tap(find.text('Quarter'));
+    await tester.pumpAndSettle();
+
+    final quarter = ((DateTime.now().month - 1) ~/ 3) + 1;
+    expect(find.text('Q$quarter ${DateTime.now().year}'), findsOne);
+  });
+
+  testWidgets('fixed expenses page contains both drag sections', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const MaterialApp(home: FixedExpensesPage()));
+
+    expect(find.text('Expected Expenses'), findsOne);
+    expect(find.text('This Month Expenses'), findsOne);
+    expect(find.byTooltip('Add fixed expense'), findsOne);
   });
 }

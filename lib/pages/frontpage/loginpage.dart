@@ -2,8 +2,6 @@ import 'package:expense_tracker/pages/frontpage/signinpage.dart';
 import 'package:expense_tracker/util/bottomnavbar.dart';
 import 'package:flutter/material.dart';
 
-import '../homepage.dart';
-
 class Loginpage extends StatelessWidget {
   const Loginpage({super.key});
 
@@ -19,98 +17,110 @@ class Loginpage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             // SizedBox(height: 60,),
-            Text("Get started with TrackIT",
+            Text(
+              "Get started with TrackIT",
               style: TextStyle(
-                fontSize: width*0.05,
+                fontSize: width * 0.05,
                 fontWeight: FontWeight.bold,
-              ),),
-            SizedBox(height: height*0.0013,),
-            Text("Create a secure account in just a few steps",
+              ),
+            ),
+            SizedBox(height: height * 0.0013),
+            Text(
+              "Create a secure account in just a few steps",
               style: TextStyle(
-                fontSize: width*0.04,
+                fontSize: width * 0.04,
                 fontWeight: FontWeight.w300,
-              ),),
-            SizedBox(height: height*0.01,),
+              ),
+            ),
+            SizedBox(height: height * 0.01),
             Padding(
               padding: EdgeInsets.symmetric(
-                vertical: height*0.026,
-                horizontal: width*0.026
+                vertical: height * 0.026,
+                horizontal: width * 0.026,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Email",
-                    style: TextStyle(
-                      fontSize: width*0.038,
-                    ),),
-                  SizedBox(height: height*0.005,),
+                  Text("Email", style: TextStyle(fontSize: width * 0.038)),
+                  SizedBox(height: height * 0.005),
                   TextField(
                     decoration: InputDecoration(
                       // labelText: 'Email',
-                        hintText: "Enter email",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(width*0.027)
-                        )
+                      hintText: "Enter email",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(width * 0.027),
+                      ),
                     ),
                   ),
-                  SizedBox(height: height*0.035,),
-                  Text("Password",
-                    style: TextStyle(
-                      fontSize: width*0.038,
-                    ),),
-                  SizedBox(height: height*0.005,),
+                  SizedBox(height: height * 0.035),
+                  Text("Password", style: TextStyle(fontSize: width * 0.038)),
+                  SizedBox(height: height * 0.005),
                   TextField(
                     decoration: InputDecoration(
                       // labelText: 'Password',
-                        hintText: "Enter Password",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(width*0.027)
-                        )
+                      hintText: "Enter Password",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(width * 0.027),
+                      ),
                     ),
                   ),
 
                   // SizedBox(height: height*0.002,),
                   Padding(
-                    padding: EdgeInsets.only(left: width*0.6),
-                    child: TextButton(onPressed: (){}, child: Text("Forgot Password?")),
-                  )
+                    padding: EdgeInsets.only(left: width * 0.6),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text("Forgot Password?"),
+                    ),
+                  ),
                 ],
               ),
             ),
             // SizedBox(height: 5,),
-            ElevatedButton(onPressed: (){
-              Navigator.push(
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context)=> Bottomnavbar()));
-            }, child: Text("Log In",
-              style: TextStyle(
-                  color: Colors.white,
-                fontSize: width*0.04,
-              ),),
+                  MaterialPageRoute(builder: (context) => Bottomnavbar()),
+                );
+              },
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(width*0.9, height*0.06),
+                minimumSize: Size(width * 0.9, height * 0.06),
                 backgroundColor: Colors.black,
-              ),),
-            SizedBox(height: height*0.02,),
+              ),
+              child: Text(
+                "Log In",
+                style: TextStyle(color: Colors.white, fontSize: width * 0.04),
+              ),
+            ),
+            SizedBox(height: height * 0.02),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Don't have an account?",
+                Text(
+                  "Don't have an account?",
                   style: TextStyle(
-                      fontSize: width*0.039,
-                      fontWeight: FontWeight.w400
-                  ),),
-                TextButton(onPressed: (){
-                  Navigator.push(
+                    fontSize: width * 0.039,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context)=> Signinpage()));
-                }, child: Text("Register",style: TextStyle(
-                  fontSize: width*0.039,
-                  // fontWeight: FontWeight.w400
-                ),))
+                      MaterialPageRoute(builder: (context) => Signinpage()),
+                    );
+                  },
+                  child: Text(
+                    "Register",
+                    style: TextStyle(
+                      fontSize: width * 0.039,
+                      // fontWeight: FontWeight.w400
+                    ),
+                  ),
+                ),
               ],
-            )
-
+            ),
           ],
         ),
       ),

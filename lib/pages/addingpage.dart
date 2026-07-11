@@ -1,8 +1,11 @@
+import 'package:expense_tracker/models/transaction_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AddExpense extends StatefulWidget {
-  const AddExpense({super.key});
+  const AddExpense({super.key, required this.onSave});
+
+  final ValueChanged<TransactionEntry> onSave;
 
   @override
   State<AddExpense> createState() => _AddExpenseState();
@@ -10,7 +13,7 @@ class AddExpense extends StatefulWidget {
 
 class _AddExpenseState extends State<AddExpense> {
   // Amount handled as string for digit-by-digit input
-  String amount = "20.00";
+  String amount = "";
   bool isExpense = true;
 
   // Date selector
@@ -19,7 +22,7 @@ class _AddExpenseState extends State<AddExpense> {
 
   // Category / emoji / note
   String selectedEmoji = "🍔";
-  String categoryName = "burger king";
+  String categoryName = "";
   String categoryNote = "";
 
   // Controllers used inside bottom sheet
@@ -54,6 +57,7 @@ class _AddExpenseState extends State<AddExpense> {
   @override
   void initState() {
     super.initState();
+    selectedEmoji = '';
 
     // Build days: today -2 .. today +2
     DateTime today = DateTime.now();
@@ -190,42 +194,47 @@ class _AddExpenseState extends State<AddExpense> {
                 crossAxisCount: 8,
                 shrinkWrap: true,
                 childAspectRatio: 1,
-                children: _emojis.map((e) {
-                  return InkWell(
-                    onTap: () {
-                      // If user taps "➕" (others), open simple dialog to enter emoji/text
-                      if (e == '➕') {
-                        Navigator.of(context).pop();
-                        _openCustomEmojiDialog();
-                      } else {
-                        setState(() {
-                          selectedEmoji = e;
-                        });
-                        Navigator.of(context).pop();
-                        // reopen sheet to allow editing name/note with new emoji
-                        Future.delayed(const Duration(milliseconds: 150),
-                                () => _openCategoryBottomSheet());
-                      }
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        color: selectedEmoji == e
-                            ? Colors.black.withOpacity(0.1)
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: selectedEmoji == e
-                              ? Colors.black
-                              : Colors.transparent,
-                          width: 1,
+                children:
+                    _emojis.map((e) {
+                      return InkWell(
+                        onTap: () {
+                          // If user taps "➕" (others), open simple dialog to enter emoji/text
+                          if (e == '➕') {
+                            Navigator.of(context).pop();
+                            _openCustomEmojiDialog();
+                          } else {
+                            setState(() {
+                              selectedEmoji = e;
+                            });
+                            Navigator.of(context).pop();
+                            // reopen sheet to allow editing name/note with new emoji
+                            Future.delayed(
+                              const Duration(milliseconds: 150),
+                              () => _openCategoryBottomSheet(),
+                            );
+                          }
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            color:
+                                selectedEmoji == e
+                                    ? Colors.black.withValues(alpha: 0.1)
+                                    : Colors.transparent,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color:
+                                  selectedEmoji == e
+                                      ? Colors.black
+                                      : Colors.transparent,
+                              width: 1,
+                            ),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(e, style: const TextStyle(fontSize: 20)),
                         ),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(e, style: const TextStyle(fontSize: 20)),
-                    ),
-                  );
-                }).toList(),
+                      );
+                    }).toList(),
               ),
 
               const SizedBox(height: 12),
@@ -263,9 +272,10 @@ class _AddExpenseState extends State<AddExpense> {
                     child: ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          categoryName = _catNameController.text.trim().isEmpty
-                              ? "Others"
-                              : _catNameController.text.trim();
+                          categoryName =
+                              _catNameController.text.trim().isEmpty
+                                  ? "Others"
+                                  : _catNameController.text.trim();
                           categoryNote = _noteController.text.trim();
                         });
                         Navigator.of(context).pop();
@@ -287,7 +297,7 @@ class _AddExpenseState extends State<AddExpense> {
   }
 
   void _openCustomEmojiDialog() {
-    final TextEditingController _emojiController = TextEditingController();
+    final TextEditingController emojiController = TextEditingController();
     showDialog(
       context: context,
       builder: (context) {
@@ -299,10 +309,8 @@ class _AddExpenseState extends State<AddExpense> {
               const Text("Paste an emoji or short text to represent the icon"),
               const SizedBox(height: 8),
               TextField(
-                controller: _emojiController,
-                decoration: const InputDecoration(
-                  hintText: "e.g., 🥤 or 🧾",
-                ),
+                controller: emojiController,
+                decoration: const InputDecoration(hintText: "e.g., 🥤 or 🧾"),
               ),
             ],
           ),
@@ -315,7 +323,7 @@ class _AddExpenseState extends State<AddExpense> {
             ),
             ElevatedButton(
               onPressed: () {
-                final input = _emojiController.text.trim();
+                final input = emojiController.text.trim();
                 if (input.isNotEmpty) {
                   setState(() {
                     selectedEmoji = input;
@@ -323,11 +331,13 @@ class _AddExpenseState extends State<AddExpense> {
                 }
                 Navigator.of(context).pop();
                 // reopen bottom sheet to continue editing other fields
-                Future.delayed(const Duration(milliseconds: 150),
-                        () => _openCategoryBottomSheet());
+                Future.delayed(
+                  const Duration(milliseconds: 150),
+                  () => _openCategoryBottomSheet(),
+                );
               },
               child: const Text("Add"),
-            )
+            ),
           ],
         );
       },
@@ -351,44 +361,48 @@ class _AddExpenseState extends State<AddExpense> {
             padding: const EdgeInsets.symmetric(vertical: 6),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: row.map((k) {
-                final bool isDelete = k == 'del';
-                return GestureDetector(
-                  onTap: () {
-                    if (isDelete) {
-                      _onKeyTap('del');
-                    } else {
-                      _onKeyTap(k);
-                    }
-                  },
-                  child: Container(
-                    width: btnSize,
-                    height: btnSize,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.03),
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        )
-                      ],
-                    ),
-                    alignment: Alignment.center,
-                    child: isDelete
-                        ? const Icon(Icons.backspace_outlined)
-                        : Text(
-                      k,
-                      style: const TextStyle(
-                          fontSize: 26, fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                );
-              }).toList(),
+              children:
+                  row.map((k) {
+                    final bool isDelete = k == 'del';
+                    return GestureDetector(
+                      onTap: () {
+                        if (isDelete) {
+                          _onKeyTap('del');
+                        } else {
+                          _onKeyTap(k);
+                        }
+                      },
+                      child: Container(
+                        width: btnSize,
+                        height: btnSize,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade100,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.03),
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        alignment: Alignment.center,
+                        child:
+                            isDelete
+                                ? const Icon(Icons.backspace_outlined)
+                                : Text(
+                                  k,
+                                  style: const TextStyle(
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                      ),
+                    );
+                  }).toList(),
             ),
           );
-        }).toList(),
+        }),
 
         const SizedBox(height: 8),
 
@@ -409,7 +423,7 @@ class _AddExpenseState extends State<AddExpense> {
               child: const Icon(Icons.check, size: 28),
             ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -423,6 +437,25 @@ class _AddExpenseState extends State<AddExpense> {
     String displayAmount = _displayAmount();
     if (displayAmount == '' || displayAmount == '.') displayAmount = '0.00';
 
+    final parsedAmount = double.tryParse(amount);
+    if (parsedAmount == null || parsedAmount <= 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Enter an amount greater than zero.')),
+      );
+      return;
+    }
+
+    widget.onSave(
+      TransactionEntry(
+        amount: parsedAmount,
+        isExpense: isExpense,
+        category: categoryName.trim(),
+        note: categoryNote.trim(),
+        date: selectedDate,
+        emoji: selectedEmoji,
+      ),
+    );
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: Colors.white,
@@ -431,12 +464,19 @@ class _AddExpenseState extends State<AddExpense> {
           style: TextStyle(
             color: Colors.red,
             // fontWeight: FontWeight.w500
-          ),),
+          ),
+        ),
         duration: const Duration(seconds: 3),
       ),
     );
 
-    // Reset or keep state as you want. We'll keep current values.
+    setState(() {
+      amount = '';
+      categoryName = '';
+      categoryNote = '';
+      _catNameController.clear();
+      _noteController.clear();
+    });
   }
 
   @override
@@ -450,16 +490,17 @@ class _AddExpenseState extends State<AddExpense> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding:
-          EdgeInsets.symmetric(horizontal: padding, vertical: padding / 2),
+          padding: EdgeInsets.symmetric(
+            horizontal: padding,
+            vertical: padding / 2,
+          ),
           child: Column(
             children: [
-              const SizedBox(height: 26,),
-              Text("Add Expenses",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold
-                ),),
+              const SizedBox(height: 26),
+              Text(
+                "Add Expenses",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
               const SizedBox(height: 30),
 
               // Expense / Income toggle
@@ -518,7 +559,9 @@ class _AddExpenseState extends State<AddExpense> {
                               _weekdayShort(date.weekday),
                               style: TextStyle(
                                 color:
-                                isSelected ? Colors.white70 : Colors.grey[600],
+                                    isSelected
+                                        ? Colors.white70
+                                        : Colors.grey[600],
                                 fontSize: 14,
                               ),
                             ),
@@ -528,12 +571,14 @@ class _AddExpenseState extends State<AddExpense> {
                                 child: Text(
                                   "Today",
                                   style: TextStyle(
-                                      color: isSelected
-                                          ? Colors.white70
-                                          : Colors.blueGrey,
-                                      fontSize: 12),
+                                    color:
+                                        isSelected
+                                            ? Colors.white70
+                                            : Colors.blueGrey,
+                                    fontSize: 12,
+                                  ),
                                 ),
-                              )
+                              ),
                           ],
                         ),
                       ),
@@ -548,7 +593,10 @@ class _AddExpenseState extends State<AddExpense> {
               Text(
                 "\$${_displayAmount()}",
                 style: const TextStyle(
-                    fontSize: 40, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                ),
               ),
 
               const SizedBox(height: 12),
@@ -557,8 +605,10 @@ class _AddExpenseState extends State<AddExpense> {
               GestureDetector(
                 onTap: _openCategoryBottomSheet,
                 child: Container(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(30),
@@ -569,9 +619,11 @@ class _AddExpenseState extends State<AddExpense> {
                       Text(selectedEmoji, style: const TextStyle(fontSize: 18)),
                       const SizedBox(width: 8),
                       Text(
-                        categoryName,
-                        style:
-                        const TextStyle(color: Colors.white, fontSize: 16),
+                        categoryName.isEmpty ? 'Add details' : categoryName,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
                       ),
                       const SizedBox(width: 8),
                       const Icon(Icons.arrow_drop_down, color: Colors.white),
@@ -618,4 +670,3 @@ class _AddExpenseState extends State<AddExpense> {
     );
   }
 }
-
